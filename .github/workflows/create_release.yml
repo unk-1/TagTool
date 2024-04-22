@@ -1,4 +1,4 @@
-name: TagTool Build
+name: Create Release
 
 on:
   push:
@@ -21,12 +21,11 @@ jobs:
         Write-Output "Version determined: $version"
         Write-Host "::set-output name=version::$version"
 
-
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
 
     - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.5
+      uses: NuGet/setup-nuget@v2
       
     - name: Install 7Zip
       run: |
