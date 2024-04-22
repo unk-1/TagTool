@@ -41,7 +41,8 @@ jobs:
 
     - name: Zip Release
       run: |
-        & "C:\Program Files\7-Zip\7z.exe" a release_x64.7z TagTool/bin/x64/Release/*
+        & cd TagTool/bin/x64/Release
+        & "C:\Program Files\7-Zip\7z.exe" a release_x64.7z *
         
     - name: Create Release
       uses: softprops/action-gh-release@v1
