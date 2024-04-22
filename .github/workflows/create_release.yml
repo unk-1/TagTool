@@ -36,11 +36,6 @@ jobs:
     - name: Restore Packages
       run: nuget restore TagTool.sln
 
-    - name: Update AssemblyInfo.cs
-      run: |
-        version=${{ steps.determine_version.outputs.version }}
-        echo "[assembly: AssemblyVersion(\"$version\")]" > TagTool/Properties/AssemblyInfo.cs
-
     - name: Build solution
       run: msbuild TagTool.sln -t:rebuild -property:Platform=x64 -property:Configuration=Release
 
