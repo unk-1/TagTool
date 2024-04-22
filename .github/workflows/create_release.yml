@@ -1,4 +1,4 @@
-name: Create Release
+name: TagTool Build
 
 on:
   push:
@@ -21,11 +21,12 @@ jobs:
         Write-Output "Version determined: $version"
         Write-Host "::set-output name=version::$version"
 
+
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
 
     - name: Setup NuGet
-      uses: NuGet/setup-nuget@v2
+      uses: NuGet/setup-nuget@v1.0.5
       
     - name: Install 7Zip
       run: |
@@ -35,13 +36,13 @@ jobs:
     - name: Restore Packages
       run: nuget restore TagTool.sln
 
+
     - name: Build solution
       run: msbuild TagTool.sln -t:rebuild -property:Platform=x64 -property:Configuration=Release
 
     - name: Zip Release
       run: |
-        & cd TagTool/bin/x64/Release
-        & "C:\Program Files\7-Zip\7z.exe" a release_x64.7z *
+        & "C:\Program Files\7-Zip\7z.exe" a release_x64.7z ./TagTool/bin/x64/Release/*
         
     - name: Create Release
       uses: softprops/action-gh-release@v1
