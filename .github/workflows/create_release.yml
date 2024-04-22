@@ -21,7 +21,6 @@ jobs:
         Write-Output "Version determined: $version"
         Write-Host "::set-output name=version::$version"
 
-
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
 
@@ -49,8 +48,7 @@ jobs:
       with:
         files: release_x64.7z
         tag_name: ${{ steps.determine_version.outputs.version }}
-        release_name: TagTool Release ${{ steps.determine_version.outputs.version }}
         draft: false
-        prerelease: false
+        prerelease: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
