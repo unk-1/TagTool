@@ -49,7 +49,7 @@ jobs:
       run: |
         $lastTag = '2.0.0'
         try {
-          $lastTag = git describe --abbrev=0 --tags 2>$null
+          $lastTag = git describe --abbrev=0 --tags -ErrorAction Stop
         } catch {
           Write-Host "No tag found"
         }
