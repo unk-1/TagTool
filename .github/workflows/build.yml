@@ -14,6 +14,17 @@ jobs:
       with:
         submodules: 'true'
 
+    - name: Fetch Last Tag
+      id: fetch_last_tag
+      run: |
+        $lastTag = '2.0.0'
+        try {
+          $lastTag = git describe --abbrev=0 --tags -ErrorAction Stop
+        } catch {
+          Write-Host "No tag found"
+        }
+        echo "::set-output name=tag::$lastTag"
+
     - name: Determine Version
       id: determine_version
       run: |
@@ -42,18 +53,6 @@ jobs:
     - name: Zip Release
       run: |
         & "C:\Program Files\7-Zip\7z.exe" a release_mcc_x64.7z ./TagTool/bin/x64/Release/*
-
-
-    - name: Fetch Last Tag
-      id: fetch_last_tag
-      run: |
-        $lastTag = '2.0.0'
-        try {
-          $lastTag = git describe --abbrev=0 --tags -ErrorAction Stop
-        } catch {
-          Write-Host "No tag found"
-        }
-        echo "::set-output name=tag::$lastTag"
       
     - name: Get Current Version
       id: get_current_version
