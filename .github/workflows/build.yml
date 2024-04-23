@@ -49,6 +49,6 @@ jobs:
         files: release_mcc_x64.7z
         tag_name: "mcc_${{ steps.determine_version.outputs.version }}"
         draft: false
-        prerelease: false
+        prerelease: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
