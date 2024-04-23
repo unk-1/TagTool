@@ -46,7 +46,9 @@ jobs:
 
     - name: Fetch Last Tag
       id: fetch_last_tag
-      run: echo "::set-output name=tag::$(git describe --abbrev=0 --tags || echo '2.0.0')"
+      run: |
+        last_tag=$(git describe --abbrev=0 --tags 2>/dev/null || echo '2.0.0')
+        echo "::set-output name=tag::$last_tag"
       
     - name: Get Current Version
       id: get_current_version
