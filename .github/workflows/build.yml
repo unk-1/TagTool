@@ -46,7 +46,6 @@ jobs:
 
     - name: Fetch Last Tag
       id: fetch_last_tag
-      shell: pwsh
       run: |
         $lastTag = git describe --abbrev=0 --tags 2>$null
         if (-not $lastTag) {
