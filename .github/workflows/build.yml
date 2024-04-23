@@ -41,12 +41,12 @@ jobs:
 
     - name: Zip Release
       run: |
-        & "C:\Program Files\7-Zip\7z.exe" a release_x64.7z ./TagTool/bin/x64/Release/*
+        & "C:\Program Files\7-Zip\7z.exe" a release_mcc_x64.7z ./TagTool/bin/x64/Release/*
         
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
-        files: mcc_release_x64.7z
+        files: release_mcc_x64.7z
         tag_name: ${{ steps.determine_version.outputs.version }}
         draft: false
         prerelease: true
