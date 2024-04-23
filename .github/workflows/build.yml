@@ -10,9 +10,6 @@ jobs:
     runs-on: windows-2019
 
     steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: 'true'
 
     - name: Fetch Last Tag
       id: fetch_last_tag
@@ -21,9 +18,13 @@ jobs:
         try {
           $lastTag = git describe --abbrev=0 --tags -ErrorAction Stop
         } catch {
-          Write-Host "No tag found"
+          Write-Host "Error occurred: $_"
         }
         echo "::set-output name=tag::$lastTag"
+        
+    - uses: actions/checkout@v4
+      with:
+        submodules: 'true'
 
     - name: Determine Version
       id: determine_version
