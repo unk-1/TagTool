@@ -47,7 +47,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: release_mcc_x64.7z
-        tag_name: ${{ steps.determine_version.outputs.version }}
+        tag_name: "mcc_${{ steps.determine_version.outputs.version }}"
         draft: false
         prerelease: false
       env:
