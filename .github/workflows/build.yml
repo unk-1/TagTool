@@ -47,9 +47,11 @@ jobs:
     - name: Fetch Last Tag
       id: fetch_last_tag
       run: |
-        $lastTag = git describe --abbrev=0 --tags 2>$null
-        if (-not $lastTag) {
-          $lastTag = '2.0.0'
+        $lastTag = '2.0.0'
+        try {
+          $lastTag = git describe --abbrev=0 --tags 2>$null
+        } catch {
+          Write-Host "No tag found"
         }
         echo "::set-output name=tag::$lastTag"
       
